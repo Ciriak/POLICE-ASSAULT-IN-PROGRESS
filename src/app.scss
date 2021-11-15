@@ -1,0 +1,66 @@
+@import './variables.scss';
+
+.app {
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  .start-text {
+    opacity: 0;
+    position: absolute;
+    &.show {
+      opacity: 1;
+    }
+    &.active {
+      animation: hideStartText 0.5s steps(4) 1 forwards;
+    }
+  }
+  .social {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    margin: 20px;
+    .social-icon {
+      cursor: pointer;
+
+      opacity: 0;
+    }
+
+    &.show {
+      opacity: 1;
+    }
+
+    &.active {
+      .social-icon {
+        animation-name: socialBeat;
+        animation-iteration-count: infinite;
+      }
+    }
+  }
+}
+
+@keyframes socialBeat {
+  from {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  to {
+    opacity: 0.7;
+  }
+}
+
+@keyframes hideStartText {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,153 @@
+@import '../../variables.scss';
+.banner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+  .banner-content {
+    height: $base-size;
+
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    .banner-text-container {
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+
+      width: 0%;
+
+      .corner-helper {
+        position: absolute;
+        background-image: url('../../images/corner.png');
+        width: 50px;
+        height: 50px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        &.tl {
+          top: 0;
+          left: 0;
+        }
+        &.tr {
+          top: 0;
+          right: 0;
+          transform: rotate(90deg);
+        }
+        &.bl {
+          bottom: 0;
+          left: 0;
+          transform: rotate(270deg);
+        }
+        &.br {
+          bottom: 0;
+          right: 0;
+          transform: rotate(180deg);
+        }
+      }
+
+      .banner-text {
+        position: absolute;
+        margin-top: 4px; /* manual adjustment */
+        top: 0;
+        right: -200%;
+        height: 100%;
+        padding: $border-width;
+        font-size: 7rem;
+      }
+    }
+  }
+  .banner-icon-container {
+    display: flex;
+
+    align-items: flex-start;
+
+    margin: 20px;
+    margin-top: $border-width;
+    .banner-icon {
+      opacity: 0;
+      width: $base-size/1.5;
+      height: $base-size/1.5;
+      background-color: $main;
+
+      img {
+        width: 80%;
+        margin: 10%;
+      }
+    }
+  }
+
+  /* active banner */
+  &.active {
+    .banner-content {
+      animation: bannerFlash 1s ease-in infinite;
+      animation-delay: $animation-intro-delay;
+
+      .banner-text-container {
+        animation: bannerExpand 0.2s steps(20) forwards;
+        animation-delay: $animation-intro-delay;
+      }
+
+      .banner-text {
+        animation: textMove $banner-text-duration linear infinite forwards;
+
+        &.t-2 {
+          animation-delay: calc($banner-text-duration / 2);
+        }
+      }
+    }
+    .banner-icon-container {
+      .banner-icon {
+        animation-name: introIcon;
+        animation-duration: 0.3s;
+        animation-timing-function: step-end;
+        animation-iteration-count: 2;
+        animation-delay: 1s;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+}
+
+@keyframes introIcon {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes bannerFlash {
+  0% {
+    background-color: rgba($color: $main, $alpha: 0.1);
+  }
+  50% {
+    background-color: rgba($color: $main, $alpha: 0.3);
+  }
+  100% {
+    background-color: rgba($color: $main, $alpha: 0.1);
+  }
+}
+
+@keyframes bannerExpand {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes textMove {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-200%, 0, 0);
+  }
+}

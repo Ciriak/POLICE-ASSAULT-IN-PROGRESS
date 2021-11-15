@@ -1,0 +1,20 @@
+@import './variables.scss';
+@font-face {
+  font-family: DINEngschrift;
+  src: url('./fonts/DINEngschrift-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Share Tech Mono';
+  src: url('./fonts/ShareTechMono-Regular.ttf');
+}
+
+body {
+  overflow: hidden;
+  background: black;
+  color: $main;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Share Tech Mono', monospace, 'Courier New', Courier;
+}
