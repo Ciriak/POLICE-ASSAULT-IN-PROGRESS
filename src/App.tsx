@@ -15,23 +15,13 @@ function App() {
   const [showSocial] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
   const [audioReady, setAudioReady] = useState(false);
-  const [showStartText, setShowStartText] = useState(false);
+  const [showStartText] = useState(true);
   const bpm = 125;
 
   const loaded = videoReady && audioReady;
 
   const audioBg: string[] = ['audio/bg1.mp3', 'audio/bg2.mp3'];
   const bgAudioUrl = audioBg[Math.floor(Math.random() * audioBg.length)];
-  useEffect(() => {
-    canAutoplay.audio().then(({ result }) => {
-      console.log('Autoplay allowed', result);
-      if (result === true) {
-        handlePlay();
-      } else {
-        setShowStartText(true);
-      }
-    });
-  }, []);
 
   const handlePlay = () => {
     if (!loaded) return;
