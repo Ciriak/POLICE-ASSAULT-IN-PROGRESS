@@ -1,11 +1,11 @@
 import './app.scss';
 import Banner from './components/banner/Banner';
 import ReactHowler from 'react-howler';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Icon from '@mdi/react';
 import { mdiTwitter } from '@mdi/js';
 import classNames from 'classnames';
-import canAutoplay from 'can-autoplay';
+
 import TitleAnimator from './components/titleAnimator/TitleAnimator';
 import ReactPlayer from 'react-player';
 
