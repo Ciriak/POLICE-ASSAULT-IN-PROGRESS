@@ -4,10 +4,10 @@
   align-items: flex-start;
   justify-content: center;
   padding: 10px;
-  width: 100%;
+  width: 1200px;
+  max-width: 100%;
   .banner-content {
     height: $base-size;
-
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -70,7 +70,7 @@
       width: $base-size/1.5;
       height: $base-size/1.5;
       background-color: $main;
-
+      margin-top: -10px;
       img {
         width: 80%;
         margin: 10%;

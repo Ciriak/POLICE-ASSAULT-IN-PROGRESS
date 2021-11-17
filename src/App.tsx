@@ -7,13 +7,21 @@ import { mdiTwitter } from '@mdi/js';
 import classNames from 'classnames';
 import canAutoplay from 'can-autoplay';
 import TitleAnimator from './components/titleAnimator/TitleAnimator';
+import ReactPlayer from 'react-player';
+
 function App() {
   const [playBanner, setPlayBanner] = useState(false);
   const [playAudio, setPlayAudio] = useState(false);
   const [showSocial] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
+  const [audioReady, setAudioReady] = useState(false);
   const [showStartText, setShowStartText] = useState(false);
   const bpm = 125;
 
+  const loaded = videoReady && audioReady;
+
+  const audioBg: string[] = ['audio/bg1.mp3', 'audio/bg2.mp3'];
+  const bgAudioUrl = audioBg[Math.floor(Math.random() * audioBg.length)];
   useEffect(() => {
     canAutoplay.audio().then(({ result }) => {
       console.log('Autoplay allowed', result);
@@ -26,6 +34,7 @@ function App() {
   }, []);
 
   const handlePlay = () => {
+    if (!loaded) return;
     setPlayBanner(true);
     setTimeout(() => {
       setPlayAudio(true);
@@ -34,15 +43,41 @@ function App() {
   return (
     <div className="app" onClick={handlePlay}>
       <TitleAnimator />
-      <h2
-        className={classNames('start-text', {
-          show: showStartText,
-          active: playBanner,
-        })}
-      >
-        Click anywhere
-      </h2>
-      <ReactHowler src="audio/bg2.mp3" playing={playAudio} loop={true} />
+
+      {!loaded && <div className="preloader">Loading</div>}
+      {loaded && (
+        <h2
+          className={classNames('start-text', {
+            show: showStartText,
+            active: playBanner,
+          })}
+        >
+          Click anywhere
+        </h2>
+      )}
+
+      <ReactHowler
+        src={bgAudioUrl}
+        playing={playAudio}
+        loop={true}
+        onLoad={() => {
+          setAudioReady(true);
+        }}
+      />
+      <div className={classNames('video-bg', { active: playAudio })}>
+        <ReactPlayer
+          url="video/bg.mp4"
+          playing={playAudio}
+          loop={true}
+          width="100%"
+          height="100%"
+          muted
+          onReady={() => {
+            setVideoReady(true);
+          }}
+        />
+      </div>
+
       <Banner separator="//" text="POLICE ASSAULT IN PROGRESS" active={playBanner} />
       <div
         className={classNames('social', {

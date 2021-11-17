@@ -19,6 +19,31 @@
       animation: hideStartText 0.5s steps(4) 1 forwards;
     }
   }
+
+  .video-bg {
+    filter: grayscale(100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition-duration: 0.2s;
+    transition-delay: 2s;
+    opacity: 0;
+    &.active {
+      opacity: 0.2;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+  }
+
+  .banner {
+    position: absolute;
+    z-index: 2;
+  }
   .social {
     position: absolute;
     bottom: 0;
